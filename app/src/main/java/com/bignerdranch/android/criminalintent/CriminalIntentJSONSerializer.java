@@ -44,7 +44,8 @@ public class CriminalIntentJSONSerializer {
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             // build the array of crimes from JSONObjects
             for (int i = 0; i < array.length(); i++) {
-                crimes.add(new Crime(array.getJSONObject(i)));
+//                crimes.add(new Crime(array.getJSONObject(i))); //commented by Jun
+                crimes.add(new CrimeWithExtraPictures(array.getJSONObject(i)));
             }
         } catch (FileNotFoundException e) {
             // we will ignore this one, since it happens when we start fresh

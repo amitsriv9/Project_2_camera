@@ -129,7 +129,8 @@ public class CrimeListFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_crime:
-                Crime crime = new Crime();
+//                Crime crime = new Crime(); //commented by JUN
+                Crime crime = new CrimeWithExtraPictures();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent i = new Intent(getActivity(), CrimeActivity.class);
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());

@@ -40,6 +40,15 @@ public class CrimeFragment extends Fragment {
     CheckBox mSolvedCheckBox;
     ImageButton mPhotoButton;
     ImageView mPhotoView;
+    //
+    ImageView mPhotoView2;
+    ImageView mPhotoView3;
+    ImageView mPhotoView4;
+    //
+    //========
+
+
+    //=====
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -129,10 +138,23 @@ public class CrimeFragment extends Fragment {
         }
 
         mPhotoView = (ImageView)v.findViewById(R.id.crime_imageView);
+        mPhotoView2 = (ImageView)v.findViewById(R.id.crime_imageView2);
+        mPhotoView3 = (ImageView)v.findViewById(R.id.crime_imageView3);
+        mPhotoView4 = (ImageView)v.findViewById(R.id.crime_imageView4);
+
+        setImageListenner(mPhotoView,  1);
+        setImageListenner(mPhotoView2, 2);
+        setImageListenner(mPhotoView3, 3);
+        setImageListenner(mPhotoView4, 4);
+
+        return v; 
+    }
+
+    private void setImageListenner(ImageView mPhotoView, final int photoID) {
         mPhotoView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Photo p = mCrime.getPhoto();
-                if (p == null) 
+                Photo p = ((CrimeWithExtraPictures)mCrime).getPhoto(photoID);
+                if (p == null)
                     return;
 
                 FragmentManager fm = getActivity()
@@ -143,22 +165,41 @@ public class CrimeFragment extends Fragment {
                     .show(fm, DIALOG_IMAGE);
             }
         });
-        
-        
-        return v; 
     }
-    
-    private void showPhoto() {
+
+    private void showPhoto(ImageView mPhotoView, int photoID) {
         // (re)set the image button's image based on our photo
-        Photo p = mCrime.getPhoto();
+        Photo p = ((CrimeWithExtraPictures)mCrime).getPhoto(photoID);
         BitmapDrawable b = null;
         if (p != null) {
             String path = getActivity()
-                .getFileStreamPath(p.getFilename()).getAbsolutePath();
+                    .getFileStreamPath(p.getFilename()).getAbsolutePath();
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         mPhotoView.setImageDrawable(b);
+        //todo show extra photos ??
     }
+
+    private void showPhoto(){
+        showPhoto(mPhotoView, 0);
+        showPhoto(mPhotoView2, 1);
+        showPhoto(mPhotoView3, 2);
+        showPhoto(mPhotoView4, 3);
+    }
+    //commented by JUN
+//    private void showPhoto() {
+//        // (re)set the image button's image based on our photo
+//        Photo p = mCrime.getPhoto();
+//        BitmapDrawable b = null;
+//        if (p != null) {
+//            String path = getActivity()
+//                .getFileStreamPath(p.getFilename()).getAbsolutePath();
+//            b = PictureUtils.getScaledDrawable(getActivity(), path);
+//        }
+//        mPhotoView.setImageDrawable(b);
+//
+//        //todo show extra photos ??
+//    }
 
     @Override
     public void onStart() {
