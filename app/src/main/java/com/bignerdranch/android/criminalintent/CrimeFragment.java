@@ -113,11 +113,12 @@ public class CrimeFragment extends Fragment {
             }
         });
         ////====================JUN button start
-        mDateButton = (Button) v.findViewById(R.id.delete_photos);
-        mDateButton.setOnClickListener(new View.OnClickListener(){
+        mDeleteButton = (Button) v.findViewById(R.id.delete_photos);
+        mDeleteButton.setOnClickListener(new View.OnClickListener(){
                public void onClick(View v){
                    ((CrimeWithExtraPictures)mCrime).removeAllPhotos();
                    clearPictures();
+//                   showPhoto();
                }
            }
         );
@@ -189,6 +190,9 @@ public class CrimeFragment extends Fragment {
             String path = getActivity()
                     .getFileStreamPath(p.getFilename()).getAbsolutePath();
             b = PictureUtils.getScaledDrawable(getActivity(), path);
+        }
+        else{
+            System.out.println("null photo for id" + photoID);
         }
         mPhotoView.setImageDrawable(b);
     }

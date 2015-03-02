@@ -39,7 +39,7 @@ public class CrimeWithExtraPictures extends Crime{
     public JSONObject toJSON() throws JSONException {
         JSONObject json = super.toJSON();
         json.put(JSON_PHOTO_COUNT, photo_count);
-        for(int i = 1; i <= photo_count; i++){
+        for(int i = 1; i < photo_count; i++){
             json.put(JSON_EXTRA_PHOTO + i, mExtraPhotos.get(i));
         }
         json.put(JSON_EXTRA_NUMBER, extra_number);
@@ -62,7 +62,7 @@ public class CrimeWithExtraPictures extends Crime{
         }else {
             photo_count++;
         }
-        mExtraPhotos.add(getPhoto());
+        if(getPhoto() != null) {mExtraPhotos.add(getPhoto());}
         super.setPhoto(photo);
     }
 
@@ -74,6 +74,7 @@ public class CrimeWithExtraPictures extends Crime{
         //todo remove files from file system
         super.setPhoto(null); //todo check if this is right way
         mExtraPhotos.clear();
+        photo_count = 0;
     }
 
     public int getPhoto_count(){
@@ -83,7 +84,7 @@ public class CrimeWithExtraPictures extends Crime{
 
     public Photo getPhoto(int id){
         if(id == 0){return super.getPhoto();}
-        else if(id <= photo_count){
+        else if(id < photo_count){
             return mExtraPhotos.get(id - 1);
         }else {
             return null;
