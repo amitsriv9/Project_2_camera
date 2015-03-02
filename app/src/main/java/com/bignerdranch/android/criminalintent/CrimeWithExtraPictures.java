@@ -72,7 +72,7 @@ public class CrimeWithExtraPictures extends Crime{
 
     public void removeAllPhotos(){
         //todo remove files from file system
-        setPhoto(null); //todo check if this is right way
+        super.setPhoto(null); //todo check if this is right way
         mExtraPhotos.clear();
     }
 

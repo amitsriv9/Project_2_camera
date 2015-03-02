@@ -44,6 +44,7 @@ public class CrimeFragment extends Fragment {
     ImageView mPhotoView2;
     ImageView mPhotoView3;
     ImageView mPhotoView4;
+    Button mDeleteButton;
     //
     //========
 
@@ -111,7 +112,20 @@ public class CrimeFragment extends Fragment {
                 dialog.show(fm, DIALOG_DATE);
             }
         });
-        
+        ////====================JUN button start
+        mDateButton = (Button) v.findViewById(R.id.delete_photos);
+        mDateButton.setOnClickListener(new View.OnClickListener(){
+               public void onClick(View v){
+                   ((CrimeWithExtraPictures)mCrime).removeAllPhotos();
+                   clearPictures();
+               }
+           }
+        );
+        ////====================JUN button end
+
+
+
+
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -177,7 +191,6 @@ public class CrimeFragment extends Fragment {
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         mPhotoView.setImageDrawable(b);
-        //todo show extra photos ??
     }
 
     private void showPhoto(){
@@ -248,5 +261,12 @@ public class CrimeFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         } 
+    }
+
+    private void clearPictures(){
+        mPhotoView.setImageDrawable(null);
+        mPhotoView2.setImageDrawable(null);
+        mPhotoView3.setImageDrawable(null);
+        mPhotoView4.setImageDrawable(null);
     }
 }
