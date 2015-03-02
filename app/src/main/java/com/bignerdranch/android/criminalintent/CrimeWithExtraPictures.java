@@ -40,7 +40,7 @@ public class CrimeWithExtraPictures extends Crime{
         JSONObject json = super.toJSON();
         json.put(JSON_PHOTO_COUNT, photo_count);
         for(int i = 1; i < photo_count; i++){
-            json.put(JSON_EXTRA_PHOTO + i, mExtraPhotos.get(i));
+            json.put(JSON_EXTRA_PHOTO + i, mExtraPhotos.get(i).toJSON());
         }
         json.put(JSON_EXTRA_NUMBER, extra_number);
 //        json.put()
