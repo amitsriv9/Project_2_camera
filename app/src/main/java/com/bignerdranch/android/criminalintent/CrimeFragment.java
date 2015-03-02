@@ -186,7 +186,7 @@ public class CrimeFragment extends Fragment {
                 .getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
             if (filename != null) {
                 Photo p = new Photo(filename);
-                mCrime.setPhoto(p);
+                mCrime.setPhoto(p); //get photo from camera
                 showPhoto();
             }
         }
